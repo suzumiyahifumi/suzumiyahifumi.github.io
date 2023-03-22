@@ -29,18 +29,18 @@ body {
 #divine-button{
 	top: calc(100% / 3 * 2 - (100vw * 5 / 160) * 2 - 40px);
 	left: 5%;
-	background-image: url('/appdist/button/塔羅牌_按鈕_占卜_2.png');
+	background-image: url('./appdist/button/塔羅牌_按鈕_占卜_2.png');
 }
 #divine-button:active{
-	background-image: url('/appdist/button/塔羅牌_按鈕_占卜_1.png');
+	background-image: url('./appdist/button/塔羅牌_按鈕_占卜_1.png');
 }
 #shuffle-button{
 	top: calc(100% / 3 * 2 - (100vw * 5 / 160) - 20px);
 	left: 5%;
-	background-image: url('/appdist/button/塔羅牌_按鈕_洗牌_2.png');
+	background-image: url('./appdist/button/塔羅牌_按鈕_洗牌_2.png');
 }
 #shuffle-button:active{
-	background-image: url('/appdist/button/塔羅牌_按鈕_洗牌_1.png');
+	background-image: url('./appdist/button/塔羅牌_按鈕_洗牌_1.png');
 }
 
 .outer{
@@ -178,7 +178,7 @@ body {
 }
 .page.front {
 	background: rgb(0 0 0);
-	background-image: url('/appdist/cards/塔羅牌_背面_輸出.png');
+	background-image: url('./appdist/cards/塔羅牌_背面_輸出.png');
 	background-size: cover;
 	border-color: #ac8200;
 }
