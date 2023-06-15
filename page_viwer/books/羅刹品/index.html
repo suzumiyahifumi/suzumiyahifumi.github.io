@@ -1,0 +1,178 @@
+<!doctype html>
+<head>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<title></title>
+	<script type="text/javascript" src="../appdist/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src='../appdist/js/turn.js'></script>
+</head>
+<style>
+	.page {
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		background-position:center;
+	}
+	.book {
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+	}
+	.book .shadow{
+		box-shadow: 0 4px 10px #666;
+	}
+
+	.changePageContainer {
+		opacity: 0.4;
+		transition:opacity 0.5s
+	}
+
+	.changePageContainer:hover{
+		opacity:1;
+		transition:opacity 0.5s
+	}
+
+	.changePage {
+		display: flex;
+		height: 40px;
+		width: 40px;
+		align-items: center;
+		background: #41414182;
+		border-radius: 10px;
+		text-align: center;
+		cursor: pointer;
+		margin: 0 auto;
+		backdrop-filter: blur(2px);
+	}
+	.changePage:hover {
+		background: #8d8d8d !important;
+	}
+	.even .gradient{
+		background: rgb(136,136,136);
+		background: linear-gradient(90deg, rgba(136,136,136,0.3937907926842612) 0%, rgba(141,141,141,0) 8%,
+		rgba(255,255,255,0) 100%);
+		top: 0px;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-left-width: 1px;
+		border-left-style: outset;
+		border-left-color: #000000e3;
+	}
+	.odd .gradient{
+		background: rgb(136,136,136);
+		background: linear-gradient(270deg, rgba(136,136,136,0.3937907926842612) 0%, rgba(141,141,141,0) 8%,
+		rgba(255,255,255,0) 100%);
+		top: 0px;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	.gradient {
+		cursor: pointer;
+	}
+
+	.headerBar {
+		z-index: 9999;
+		opacity: 0;
+		transition-property:opacity;
+		transition-duration: 1s;
+		transition-delay: 2s;
+	}
+
+	.headerBar:hover {
+		opacity:1;
+		transition:opacity 0.5s
+	}
+</style>
+<body style="overflow: hidden; background: rgb(144, 201, 191) none repeat scroll 0% 0%; user-select: none; margin: 0px !important;background-image: url('./img/Lovepik_com-400969629-ink-painting.png');background-position: -200px 0px;" onload="loadApp()">
+	<div style="background: #12121200; width: 100vw; height: 100vh; margin: 0 auto;">
+		<div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+			<div class="changePageContainer" style="width: 100px; height: 100%; background:  #25252500; order: 1; display: flex; align-items: center;z-index: 9999;">
+				<div class="changePage" id="previousPage" onclick="$('#book').turn('next');">
+					<div style="margin: 0 auto;color: #fff;">
+						＜
+					</div>
+				</div>
+			</div>
+			<div class="changePageContainer" style="width: 100px; height: 100%; background:  #25252500; order: 3; display: flex; align-items: center;z-index: 9999;">
+				<div class="changePage" id="nextPage" onclick="$('#book').turn('previous');">
+					<div style="margin: 0 auto;color: #fff;">
+						＞
+					</div>
+				</div>
+			</div>
+			<div style="width: calc(100% - 200px); height: 100%; background:  #0000; order: 2;display: flex;align-items: center;">
+				<div id="bookContainer" style="height: 100vh; width: 141.7vh;margin: 0 auto;max-width: 100%;max-height: calc((100vw - 200px) * 0.7057);">
+					<div id="book" class="book shadow"></div>
+				</div>
+			</div>
+		</div>
+		<div class="headerBar" style="width: 100%;height: 70px;position: fixed;top: 0px;/*! background: #0a0a0a85; */">
+			<div style="width: 100%;height: 100%;display: flex;align-items: center;">
+				<div style="width: 100px;height: 70px;order: 1;display: flex;align-items: center;">
+					<div class="headerButton" style="width: 40px;height: 40px;margin: 0 auto;background: #00000021;border-radius: 10px;"></div>
+				</div>
+				<div style="width: calc(100% - 200px);height: 70px;display: flex;align-items: center;order: 2;">
+					<div class="headerButton" style="width: 80px;height: 40px;margin: 0 auto;background: #00000021;border-radius: 10px;"></div>
+				</div>
+				<div style="width: 100px;height: 70px;order: 3;display: flex;align-items: center;">
+					<div class="headerButton" style="width: 40px;height: 40px;margin: 0 auto;background: #00000021;border-radius: 10px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function loadApp() {
+			$.ajax({
+				dataType: "json",
+				url: './metadata.json',
+				success: (metadata) => {
+					$(`title`).val(metadata.bookName);
+
+					for(let p=1; p<=metadata.pages; p++) {
+						$("#book").append(`
+							<div class="page p${p} ${(p==1 || p==2 || p==metadata.pages || p==metadata.pages-1)?`hard`: ``}" style="height: 100vh; width: 70.85vh;">
+								<img src="./${p}.png" alt="" style="width: 100%; height: 100%; pointer-events: none;${(p==1 || p==2 || p==metadata.pages || p==metadata.pages-1)?``: `opacity: 0.97;`}">
+								${(p==1||p==metadata.pages)? `` : (p%2==1)? `<div class="gradient" onclick="$('#book').turn('next');"></div>
+								` : `<div class="gradient" onclick="$('#book').turn('previous');"></div>`}
+							</div>
+						`);
+					}
+
+					$('#book').turn({
+						width: $("#bookContainer").width(),
+						height: $("#bookContainer").height(),
+						elevation: 50,
+						gradients: true,
+						autoCenter: true,
+						direction:"rtl",
+						acceleration: true
+					});
+
+					$(window).resize(function(){
+						$("#book").turn("size", $("#bookContainer").width(),$("#bookContainer").height());
+					//	$("#book").turn("center", undefined, false);
+					})
+
+					$(document).keydown(function(e){
+						const previous = 39, next = 37;
+						switch (e.keyCode) {
+							case previous:
+								$('#book').turn('previous');
+								e.preventDefault();
+
+							break;
+							case next:
+								$('#book').turn('next');
+								e.preventDefault();
+
+								break;
+						}
+					});
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>
