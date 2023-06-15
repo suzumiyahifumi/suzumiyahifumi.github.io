@@ -126,7 +126,7 @@
 				dataType: "json",
 				url: './metadata.json',
 				success: (metadata) => {
-					$(`title`).val(metadata.bookName);
+					$(`title`).text(metadata.bookName);
 
 					for(let p=1; p<=metadata.pages; p++) {
 						$("#book").append(`
