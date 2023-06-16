@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         clock-tampermonkey by suzumiyahifumi
-// @namespace    http://tampermonkey.net/
+// @namespace    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
 // @version      1.0
 // @description  上班打卡
 // @author       suzumiyahifumi
