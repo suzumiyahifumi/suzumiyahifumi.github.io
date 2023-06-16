@@ -7,6 +7,7 @@
 // @match        https://clock.scsiis-island.com/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=scsiis-island.com
 // @grant        none
+// @updateURL    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
 // ==/UserScript==
 
 (function () {
