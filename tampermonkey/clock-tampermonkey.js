@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         clock-tampermonkey by suzumiyahifumi
-// @namespace    http://tampermonkey.net/
+// @namespace    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
 // @version      1.0
 // @description  上班打卡
 // @author       suzumiyahifumi
 // @match        https://clock.scsiis-island.com/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=scsiis-island.com
 // @grant        none
+// @homepage    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
+// @updateURL    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
+// @downloadURL    https://suzumiyahifumi.com/tampermonkey/clock-tampermonkey.js
 // ==/UserScript==
 
 (function () {
