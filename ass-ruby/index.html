@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>app-ruby-html</title>
+	<title>app-ruby</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/lib/codemirror.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/addon/fold/foldgutter.css">
 	<script src="./ass-parser-bundle.js"></script>
@@ -92,10 +92,10 @@
 	<header>
 		<h1>ass-ruby</h1>
 		<div style="margin-left: auto;">
-			<span>標音與字幕距離：</span><input id="range" type="text" value="0" onchange="onModeChange()">
-			<span>開啟檔案：<input type="file" onchange="loadFile(this.files[0])"></span>
-			<span><button class="downloadBtn" onclick="downloadFile()">下載轉換完成 ass</button>
-			</span>
+			<span>格式：朝焼(あさや)け色(いろ)の頬(ほほ)を伝(つた)って</span>|
+			<span>標音與字幕距離：</span><input id="range" type="text" value="0" onchange="onModeChange()">|
+			<span>開啟檔案：<input type="file" onchange="loadFile(this.files[0])"></span>|
+			<span><button class="downloadBtn" onclick="downloadFile()">下載轉換完成 ass</button></span>|
 			<label><input type="radio" name="api" onclick="onModeChange('parse')">手動註解標音</label>
 			<!--	<label><input type="radio" name="api" onclick="onModeChange('compile')" checked="">AI註解標音</label> 
 			<button id="run" disabled="">開始轉換</button>-->
@@ -106,7 +106,7 @@
 			<div class="desc">Original ASS Text</div>
 		</section>
 		<section id="serialized">
-			<div class="desc">Convert ASS Text</div>
+			<div class="desc">Converted ASS Text</div>
 		</section>
 	</main>
 
