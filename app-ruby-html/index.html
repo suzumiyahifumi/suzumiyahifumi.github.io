@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>app-ruby-html</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/lib/codemirror.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/addon/fold/foldgutter.css">
+	<script src="./ass-parser-bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/lib/codemirror.min.js"></script>
+	<style>
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+
+		::-webkit-scrollbar-track-piece {
+			background: #fff;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, .38);
+			border-radius: 4px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(0, 0, 0, .54);
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+		}
+
+		header {
+			flex: 0 0 40px;
+			background-color: #f7f7f7;
+			padding: 0 8px;
+			display: flex;
+			align-items: center;
+		}
+
+		header h1 {
+			font-size: 24px;
+			margin: 0;
+		}
+
+		.badge {
+			display: inline-flex;
+			margin-left: 8px;
+		}
+
+		main {
+			flex: 1 1 100%;
+			min-height: 0;
+			border-top: 1px solid #ddd;
+			display: flex;
+		}
+
+		main>section {
+			min-width: 0;
+			flex: 1 1 50%;
+			border-left: 1px solid #ddd;
+			position: relative;
+		}
+
+		.desc {
+			background-color: wheat;
+			padding: 0 4px;
+			opacity: 0.7;
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			right: 8px;
+			z-index: 999;
+		}
+
+		.CodeMirror {
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>ass-ruby</h1>
+		<div style="margin-left: auto;">
+			<span>標音與字幕距離：</span><input id="range" type="text" value="0" onchange="onModeChange()">
+			<input type="file" onchange="loadFile(this.files[0])">
+			<label><input type="radio" name="api" onclick="onModeChange('parse')">手動註解標音</label>
+		<!--	<label><input type="radio" name="api" onclick="onModeChange('compile')" checked="">AI註解標音</label> 
+			<button id="run" disabled="">開始轉換</button>-->
+		</div>
+	</header>
+	<main>
+		<section id="origin">
+			<div class="desc">Original ASS Text</div>
+		</section>
+		<section id="serialized">
+			<div class="desc">Convert ASS Text</div>
+		</section>
+	</main>
+
+	<script>
+		var originCodeMirror = CodeMirror(document.getElementById('origin'), {
+			value: '',
+			mode: 'text',
+			lineNumbers: true,
+		});
+		var serializedCodeMirror = CodeMirror(document.getElementById('serialized'), {
+			value: '',
+			mode: 'text',
+			readOnly: true,
+			lineNumbers: true,
+		});
+
+
+		function main() {
+			try {
+				let range = document.getElementById("range").value || "0";
+
+				const convert2Karaoke = function (str) {
+					let reply = str.replace(/([\u4e00-\u9faf\u3400-\u4dbf]+)(\()([\u3040-\u309f\u30a0-\u30ff]+)(\))/g, "{\\k0}$1|<$3{\\k0}");
+					return reply;
+				};
+				let ass = assParser(originCodeMirror.getValue());
+				for (let section of ass) {
+					if (section.section == "Events") {
+						for (let dialogue of section.body) {
+							if (dialogue.key == "Dialogue") {
+								console.log(`\n[${dialogue.key}]\n${dialogue.value.Text}`);
+								dialogue.value.Effect = "karaoke";
+								dialogue.value.Text = convert2Karaoke(dialogue.value.Text);
+								dialogue.key = "Comment";
+								console.log(`[${dialogue.key}]\n${dialogue.value.Text}`);
+							}
+						}
+
+						let style = section.body[1].value.Style;
+
+						section.body.splice(1, 0, {
+							"key": "Comment",
+							"value": {
+								"Layer": "0",
+								"Start": "0:00:00.00",
+								"End": "0:00:00.00",
+								"Style": style,
+								"Name": "",
+								"MarginL": "0",
+								"MarginR": "0",
+								"MarginV": "0",
+								"Effect": "template syl",
+								"Text": `{\\an5\\pos($center,!$middle+${range}!)\\K!$start/10!\\K$skdur}`
+							}
+						}, {
+							"key": "Comment",
+								"value": {
+								"Layer": "0",
+								"Start": "0:00:00.00",
+								"End": "0:00:00.00",
+								"Style": style,
+								"Name": "",
+								"MarginL": "0",
+								"MarginR": "0",
+								"MarginV": "0",
+								"Effect": "template furi",
+								"Text": "{\\an5\\pos($center,$middle)\\K!$start/10!\\K$skdur}"
+							}
+						});
+					}
+				}
+
+				let text = assStringify(ass);
+				serializedCodeMirror.setValue(text);
+			} catch (err) {
+				serializedCodeMirror.setValue('serialize failed');
+				console.log(err);
+			}
+		}
+
+		main();
+
+		function onModeChange() {
+			main();
+		}
+
+		originCodeMirror.on('change', main);
+
+		async function loadFile(file) {
+			let text = await file.text();
+			originCodeMirror.setValue(text);
+		}
+	</script>
+</body>
+</html>
