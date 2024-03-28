@@ -113,19 +113,18 @@
 	<header id="site-header">
 		<div class="wrapper">
 			<div class="pull-right">
-				<fieldset>
+				<fieldset style="display: none;">
 					<legend>Initialization</legend>
 					<button id="init-video" autocomplete="off">load sample video</button>
 					<button id="init-ass" autocomplete="off">load sample ASS</button>
 				</fieldset>
-
 				<fieldset>
 					<legend>Setting</legend>
 					<span>格式：朝焼(あさや)け色(いろ)の頬(ほほ)を伝(つた)って</span><br>
 					標音與字幕距離：<input id="range" style="width:2em;" type="text" value="0" onchange="onModeChange()"> |
 					<button class="downloadBtn" onclick="downloadFile()">儲存 ass</button>
 				</fieldset><br>
-				<fieldset>
+				<fieldset style="display: none;">
 					<legend>Controls</legend>
 					<button id="controls-resize" autocomplete="off" disabled>resize</button>
 					<button id="controls-show" autocomplete="off" disabled>show</button>
