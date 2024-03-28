@@ -92,6 +92,17 @@
 		.CodeMirror {
 			height: 100%;
 		}
+
+		.time-div tr.selected, .time-div tr.selected:nth-child(even) {
+		background-color: rgb(188, 243, 235);
+		color: rgb(0, 0, 0);
+		}
+		.time-div tr {
+		cursor: pointer;
+		}
+		.time-div tr:nth-child(even) {
+		background-color: #e6e6e6;
+		}
 	</style>
 </head>
 
@@ -117,6 +128,20 @@
 					<legend>Initialization</legend>
 					<button id="init-video" autocomplete="off">load sample video</button>
 					<button id="init-ass" autocomplete="off">load sample ASS</button>
+				</fieldset>
+				<fieldset>
+					<legend>編輯模式</legend>
+					<div>
+						<input type="radio" id="code_mode" name="editor_mode" value="code_mode"
+							onclick="document.getElementById('time_line').style.display='none';" checked />
+						<label for="code_mode">code mode</label>
+					</div>
+					<div>
+						<input type="radio" id="time_mode" name="editor_mode" value="time_mode"
+							onclick="document.getElementById('time_line').style.display='initial';generateSubtitleTable()" />
+						<label for="time_mode">time line mode</label>
+					</div>
+					<span style="font-size: 10px;">time line mode 中使用「i」,「o」,「p」打時間軸</span>
 				</fieldset>
 				<fieldset>
 					<legend>Setting</legend>
@@ -151,10 +176,167 @@
 		<section id="origin">
 			<div class="desc">Original ASS Text</div>
 		</section>
+		<section id="time_line" style="position: fixed;width: 50%;z-index: 999;height: 50%;display: none;overflow: auto;">
+			<div class="desc">Time line</div>
+			<div id="subtitleTable" class="time-div" style="width: 100%;background: white;"></div>
+		</section>
 		<section id="serialized">
 			<div class="desc">Converted ASS Text</div>
 		</section>
 	</main>
+
+	<script>
+		// JavaScript code goes here
+
+		window.selectedRow = null; // To keep track of the selected row
+
+		// Sample subtitle data
+		window.subtitles = [{
+				line: 1,
+				start: '00:00:10.000',
+				end: '00:00:15.000',
+				style: 'Default',
+				text: 'This is subtitle line 1'
+			},
+			{
+				line: 2,
+				start: '00:00:20.000',
+				end: '00:00:25.000',
+				style: 'Default',
+				text: 'This is subtitle line 2'
+			},
+			{
+				line: 4,
+				start: '00:00:30.000',
+				end: '00:00:35.000',
+				style: 'Default',
+				text: 'This is subtitle line 4'
+			},
+			{
+				line: 5,
+				start: '00:00:30.000',
+				end: '00:00:35.000',
+				style: 'Default',
+				text: 'This is subtitle line 5'
+			},
+			{
+				line: 6,
+				start: '00:00:30.000',
+				end: '00:00:35.000',
+				style: 'Default',
+				text: 'This is subtitle line 6'
+			},
+			// Add more subtitle data as needed
+		];
+
+		// Function to generate subtitle table
+		function generateSubtitleTable() {
+			const table = document.createElement('table');
+			const headerRow = table.insertRow();
+			headerRow.innerHTML = "<th>Line</th><th>Start Time</th><th>End Time</th><th>Style</th><th>Content</th>";
+
+			subtitles.forEach(subtitle => {
+				const row = table.insertRow();
+				row.innerHTML =
+					`<td>${subtitle.line}</td><td>${subtitle.start}</td><td>${subtitle.end}</td><td>${subtitle.style}</td><td>${subtitle.text}</td>`;
+				row.addEventListener('click', () => {
+					selectRow(row);
+				});
+			});
+
+			let sub = document.getElementById('subtitleTable');
+			sub.innerHTML = '';
+			sub.appendChild(table);
+		}
+
+		// Function to select a row
+		function selectRow(row) {
+			if (selectedRow) {
+				selectedRow.classList.remove('selected');
+			}
+			selectedRow = row;
+			selectedRow.classList.add('selected');
+		}
+
+		// Function to handle key press events
+		document.addEventListener('keydown', (event) => {
+			if(document.querySelector('input[name="editor_mode"]:checked').value == "code_mode"){
+				return;
+			}
+			if (selectedRow) {
+				const videoPlayer = document.getElementsByTagName('video')[0];
+				const currentTime = (videoPlayer == undefined)? 0 : videoPlayer.currentTime * 1000;
+				let time_stamp = formatTime(currentTime);
+
+				switch (event.key) {
+					case 'i':
+						selectedRow.cells[1].textContent = time_stamp;
+						subtitles[selectedRow.rowIndex - 1].start = time_stamp;
+						convertTimeLine2Ass();
+						break;
+					case 'o':
+						selectedRow.cells[2].textContent = time_stamp;
+						subtitles[selectedRow.rowIndex - 1].end = time_stamp;
+						convertTimeLine2Ass();
+						break;
+					case 'p':
+						selectedRow.cells[2].textContent = time_stamp;
+						subtitles[selectedRow.rowIndex - 1].end = time_stamp;
+						if (subtitles[selectedRow.rowIndex]) {
+							selectRow(selectedRow.nextElementSibling); // Select the next row
+							selectedRow.cells[1].textContent = time_stamp;
+							subtitles[selectedRow.rowIndex - 1].start = time_stamp;
+							selectRow(selectedRow); // If no next row, stay on the current row
+							selectedRow.cells[1].textContent = time_stamp;
+							subtitles[selectedRow.rowIndex - 1].start = time_stamp;
+						}
+						convertTimeLine2Ass();
+						break;
+					case 'ArrowUp':
+						if (selectedRow.previousElementSibling) {
+							selectRow(selectedRow.previousElementSibling);
+							event.preventDefault();
+						}
+						break;
+            		case 'ArrowDown':
+                		if (selectedRow.nextElementSibling) {
+                    		selectRow(selectedRow.nextElementSibling);
+							event.preventDefault();
+                		}
+                		break;
+				}
+			}
+		});
+
+		function convertTimeLine2Ass() {
+			let orgAss = originCodeMirror.getValue();
+			let ass_parse = assParser(orgAss);
+			let index_line = 0;
+			for (let section of ass_parse) {
+				if (section.section == "Events") {
+					for (let dialogue of section.body) {
+						if (dialogue.key == "Dialogue") {
+							dialogue.value.Start = subtitles[index_line].start;
+							dialogue.value.End = subtitles[index_line].end;
+							index_line++;
+						}
+					}
+				}
+			}
+			let text = assStringify(ass_parse);
+			originCodeMirror.setValue(text);
+		}
+
+		// Function to format time from milliseconds to HH:MM:SS.mmm
+		function formatTime(milliseconds) {
+			const date = new Date(null);
+			date.setMilliseconds(milliseconds);
+			const formattedMilliseconds = ('00' + date.getMilliseconds()).slice(-
+			3); // Ensure milliseconds are always three digits
+			return date.toISOString().substr(11, 8) + '.' + formattedMilliseconds.slice(0,
+			2); // Format milliseconds with two decimal places
+		}
+	</script>
 
 	<script>
 		var originCodeMirror = CodeMirror(document.getElementById('origin'), {
@@ -181,6 +363,8 @@
 				};
 				let orgAss = originCodeMirror.getValue();
 				let ass_parse = assParser(orgAss);
+				subtitles = [];
+				let index_line = 0;
 				for (let section of ass_parse) {
 					if (section.section == "Events") {
 						for (let dialogue of section.body) {
@@ -190,7 +374,15 @@
 								dialogue.value.Text = convert2Karaoke(dialogue.value.Text);
 								dialogue.key = "Comment";
 								console.log(`[${dialogue.key}]\n${dialogue.value.Text}`);
+
+								subtitles.push({
+									line: index_line, start: dialogue.value.Start,
+									end: dialogue.value.End,
+									style: dialogue.value.Style,
+									text: dialogue.value.Text
+								});
 							}
+							index_line++;
 						}
 
 						let style = section.body[1].value.Style;
@@ -226,7 +418,9 @@
 						});
 					}
 				}
-
+				if(document.querySelector('input[name="editor_mode"]:checked').value == "code_mode"){
+					generateSubtitleTable();
+				}
 				let text = assStringify(ass_parse);
 				serializedCodeMirror.setValue(text);
 				if(ass.reloadAss != undefined) ass.reloadAss(orgAss);
@@ -270,6 +464,7 @@
 			link.click();
 		}
 	</script>
+
 	<script src="./ass.js"></script>
 	<script src="./player.js"></script>
 </body>
