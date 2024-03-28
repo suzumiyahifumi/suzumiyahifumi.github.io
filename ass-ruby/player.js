@@ -8,7 +8,7 @@ var courl = (
 	window.createObjectURL ||
 	window.createBlobURL
 );
-var ass;
+window.ass = '';
 var content = '';
 var video = document.createElement('video');
 video.controls = true;
@@ -140,9 +140,13 @@ var loadTxt = function (data) {
 
 	// 使用正規表達式替換每一行的開頭
 	let modifiedText = `[Script Info]
-PlayResX: null
-PlayResY: null
-Collisions: Normal
+Title: Default Aegisub file
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: ${video.videoWidth || 1920}
+PlayResY: ${video.videoHeight || 1080}
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
@@ -184,6 +188,34 @@ var init = function () {
 	}
 	info.appendChild(dl);
 	$('#demo')[0].appendChild(info);
+};
+
+var reInit = function (data) {
+	content = data;
+	showMessage('success', 'ASS file is loaded.');
+	$('#init-ass')[0].disabled = true;
+	$('#drop-ASS .drop-text')[0].innerHTML = 'ASS file is loaded';
+	dropASS.style.border = '10px solid #ccc';
+	ASSReady = true;
+	ass = new ASS(content, video);
+	dropASS.style.display = 'none';
+	$('#controls-resize')[0].disabled = false;
+	$('#controls-show')[0].disabled = false;
+	$('#controls-hide')[0].disabled = false;
+	$('#controls-destroy')[0].disabled = false;
+	let info = $('#info')[0],
+		dl = document.createElement('dl'),
+		dt = document.createElement('dt');
+	info.innerHTML = '';
+	dt.textContent = '[Script Info]';
+	dl.appendChild(dt);
+	for (var i in ass.info) {
+		var dd = document.createElement('dd');
+		dd.innerHTML = i + ': <strong>' + ass.info[i] + '</strong>';
+		dl.appendChild(dd);
+	}
+	info.appendChild(dl);
+	ass.resize();
 };
 var messageNode = $('#message')[0];
 var showMessage = function (type, msg) {

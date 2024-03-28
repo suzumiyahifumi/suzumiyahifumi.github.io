@@ -1983,6 +1983,42 @@
 		return this;
 	}
 
+	function reloadAss(source) {
+		var ref = compile(source);
+		var info = ref.info;
+		var width = ref.width;
+		var height = ref.height;
+		var dialogues = ref.dialogues;
+		this.info = info;
+		this._.scriptRes = {
+			width: width || video.videoWidth,
+			height: height || video.videoHeight,
+		};
+		this.dialogues = dialogues;
+
+		var styleRoot = getStyleRoot(this.container);
+		var $style = styleRoot.querySelector('#ASS-global-style');
+		if (!$style) {
+			$style = document.createElement('style');
+			$style.type = 'text/css';
+			$style.id = 'ASS-global-style';
+			$style.appendChild(document.createTextNode(GLOBAL_CSS));
+			styleRoot.appendChild($style);
+		}
+		this._.$animation.type = 'text/css';
+		this._.$animation.className = 'ASS-animation';
+		styleRoot.appendChild(this._.$animation);
+
+		resize.call(this);
+
+		if (!this.video.paused) {
+			seek.call(this);
+			play.call(this);
+		}
+
+		return this;
+	}
+
 	function show() {
 		this._.$stage.style.visibility = 'visible';
 		return this;
@@ -2057,6 +2093,10 @@
 
 	ASS.prototype.destroy = function destroy$1() {
 		return destroy.call(this);
+	};
+	
+	ASS.prototype.reloadAss = function reloadAss$1(text) {
+		return reloadAss.call(this, text);
 	};
 
 	prototypeAccessors.resampling.get = function () {
