@@ -230,7 +230,7 @@
 
 				let text = assStringify(ass_parse);
 				serializedCodeMirror.setValue(text);
-				ass.reloadAss(orgAss);
+				if(ass.reloadAss != undefined) ass.reloadAss(orgAss);
 			//	reInit(text);
 			} catch (err) {
 				serializedCodeMirror.setValue('serialize failed');
