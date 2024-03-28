@@ -35,6 +35,9 @@
 		html,
 		body {
 			height: 100%;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
 		}
 
 		#body-div {
@@ -145,17 +148,14 @@
 		</div>
 	</div>
 	<div id="message"></div>
-	<div id="body-div">
-		<main>
-			<section id="origin">
-				<div class="desc">Original ASS Text</div>
-			</section>
-			<section id="serialized">
-				<div class="desc">Converted ASS Text</div>
-			</section>
-		</main>
-
-	</div>
+	<main>
+		<section id="origin">
+			<div class="desc">Original ASS Text</div>
+		</section>
+		<section id="serialized">
+			<div class="desc">Converted ASS Text</div>
+		</section>
+	</main>
 
 	<script>
 		var originCodeMirror = CodeMirror(document.getElementById('origin'), {
@@ -180,8 +180,9 @@
 						"{\\k0}$1|<$3{\\k0}");
 					return reply;
 				};
-				let ass = assParser(originCodeMirror.getValue());
-				for (let section of ass) {
+				let orgAss = originCodeMirror.getValue();
+				let ass_parse = assParser(orgAss);
+				for (let section of ass_parse) {
 					if (section.section == "Events") {
 						for (let dialogue of section.body) {
 							if (dialogue.key == "Dialogue") {
@@ -227,8 +228,10 @@
 					}
 				}
 
-				let text = assStringify(ass);
+				let text = assStringify(ass_parse);
 				serializedCodeMirror.setValue(text);
+				ass.reloadAss(orgAss);
+			//	reInit(text);
 			} catch (err) {
 				serializedCodeMirror.setValue('serialize failed');
 				console.log(err);
@@ -250,7 +253,7 @@
 			originCodeMirror.setValue(text);
 		}
 
-		window.assFileName = "de.ass";
+		window.assFileName = "default.ass";
 
 		function downloadFile() {
 			//藉型別陣列建構的 blob 來建立 URL
