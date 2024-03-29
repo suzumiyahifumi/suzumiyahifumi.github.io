@@ -444,6 +444,7 @@
 			console.log(file)
 			let text = await file.text();
 			originCodeMirror.setValue(text);
+			generateSubtitleTable();
 		}
 
 		window.assFileName = "default.ass";
