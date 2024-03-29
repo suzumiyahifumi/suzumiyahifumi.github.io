@@ -134,6 +134,8 @@ var loadTxt = function (data) {
 	content = data;
 	showMessage('success', 'TXT file is loaded.');
 	console.log("[[txt data]]", data);
+
+	let sys = (navigator.appVersion.indexOf("Win") != -1)? "Windows" : "Mac";
 	
 	// 要添加的前綴字串
 	let prefix = "Dialogue: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,,";
@@ -154,8 +156,9 @@ Style: Default,Arial,40,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-${data.replace(/^/gm, prefix)}`;
+${data.replace((sys == "Windows") ? /\n/gm : /^/gm, prefix)}`;
 	content = modifiedText;
+	console.log(modifiedText)
 	return modifiedText;
 };
 
