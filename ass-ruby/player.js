@@ -131,14 +131,17 @@ var loadASS = function (file) {
 };
 
 var loadTxt = function (data) {
+	let sys = (navigator.appVersion.indexOf("Win") != -1)? "Windows" : "Mac";
+
+	// 要添加的前綴字串
+	let prefix = "Dialogue: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,,";
+
+	data = (sys == "Windows")? `${prefix}${data}` :data;
 	content = data;
 	showMessage('success', 'TXT file is loaded.');
 	console.log("[[txt data]]", data);
 
-	let sys = (navigator.appVersion.indexOf("Win") != -1)? "Windows" : "Mac";
 	
-	// 要添加的前綴字串
-	let prefix = "Dialogue: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,,";
 
 	// 使用正規表達式替換每一行的開頭
 	let modifiedText = `[Script Info]
