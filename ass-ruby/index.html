@@ -133,12 +133,12 @@
 					<legend>編輯模式</legend>
 					<div>
 						<input type="radio" id="code_mode" name="editor_mode" value="code_mode"
-							onclick="document.getElementById('time_line').style.display='none';" checked />
+							onclick="document.getElementById('origin').style.flex='1 1 50%';document.getElementById('time_line').style.flex='1 1 0%';" checked />
 						<label for="code_mode">code mode</label>
 					</div>
 					<div>
 						<input type="radio" id="time_mode" name="editor_mode" value="time_mode"
-							onclick="document.getElementById('time_line').style.display='initial';generateSubtitleTable()" />
+							onclick="document.getElementById('origin').style.flex='1 1 0%';document.getElementById('time_line').style.flex='1 1 50%';generateSubtitleTable()" />
 						<label for="time_mode">time line mode</label>
 					</div>
 					<span style="font-size: 10px;">time line mode 中使用「i」,「o」,「p」打時間軸</span>
@@ -176,7 +176,7 @@
 		<section id="origin">
 			<div class="desc">Original ASS Text</div>
 		</section>
-		<section id="time_line" style="position: fixed;width: 50%;z-index: 999;height: 50%;display: none;overflow: auto;">
+		<section id="time_line" style="overflow: auto;flex:1 1 0%;">
 			<div class="desc">Time line</div>
 			<div id="subtitleTable" class="time-div" style="width: 100%;background: white;"></div>
 		</section>
