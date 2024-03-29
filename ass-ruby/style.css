@@ -23,9 +23,10 @@ video {
 }
 
 #site-header {
-	background: #d7bcf0;
+	background: #1c1c36;
 	padding: 1em 0;
 	font-family: Arial, Helvetica, sans-serif;
+	color: #ccc;
 }
 
 .badge {

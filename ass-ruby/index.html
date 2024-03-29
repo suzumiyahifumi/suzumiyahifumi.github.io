@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>ASS-Ruby</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/lib/codemirror.css">
+	<link rel="stylesheet" href="./dracula.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.53.0/addon/fold/foldgutter.css">
 	<link rel="stylesheet" href="./style.css">
 	<script src="./ass-parser-bundle.js"></script>
@@ -38,6 +39,8 @@
 			margin: 0;
 			display: flex;
 			flex-direction: column;
+			background-color: #080808;
+			color: #ffffff;
 		}
 
 		#body-div {
@@ -79,7 +82,7 @@
 		}
 
 		.desc {
-			background-color: wheat;
+			background-color: #ffb326;
 			padding: 0 4px;
 			opacity: 0.7;
 			pointer-events: none;
@@ -94,14 +97,17 @@
 		}
 
 		.time-div tr.selected, .time-div tr.selected:nth-child(even) {
-		background-color: rgb(188, 243, 235);
+		background-color: #9db7b3;
 		color: rgb(0, 0, 0);
 		}
 		.time-div tr {
 		cursor: pointer;
 		}
 		.time-div tr:nth-child(even) {
-		background-color: #e6e6e6;
+		background-color: #1a1c2b;
+		}
+		fieldset input, fieldset label, fieldset button{
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -133,12 +139,12 @@
 					<legend>編輯模式</legend>
 					<div>
 						<input type="radio" id="code_mode" name="editor_mode" value="code_mode"
-							onclick="document.getElementById('origin').style.flex='1 1 50%';document.getElementById('time_line').style.flex='1 1 0%';" checked />
+							onclick="document.getElementById('origin').style.flex='1 1 50%';document.getElementById('time_line').style.flex='1 1 0%';document.getElementById('time_line').style.display='none'" checked />
 						<label for="code_mode">code mode</label>
 					</div>
 					<div>
 						<input type="radio" id="time_mode" name="editor_mode" value="time_mode"
-							onclick="document.getElementById('origin').style.flex='1 1 0%';document.getElementById('time_line').style.flex='1 1 50%';generateSubtitleTable()" />
+							onclick="document.getElementById('origin').style.flex='1 1 0%';document.getElementById('time_line').style.flex='1 1 50%';document.getElementById('time_line').style.display='initial';generateSubtitleTable()" />
 						<label for="time_mode">time line mode</label>
 					</div>
 					<span style="font-size: 10px;">time line mode 中使用「i」,「o」,「p」打時間軸</span>
@@ -176,9 +182,9 @@
 		<section id="origin">
 			<div class="desc">Original ASS Text</div>
 		</section>
-		<section id="time_line" style="overflow: auto;flex:1 1 0%;">
+		<section id="time_line" style="flex:1 1 0%;display:none;">
 			<div class="desc">Time line</div>
-			<div id="subtitleTable" class="time-div" style="width: 100%;background: white;"></div>
+			<div id="subtitleTable" class="time-div" style="width: 100%;height:100%;overflow: auto;background: #282a36;color:#ababab;"></div>
 		</section>
 		<section id="serialized">
 			<div class="desc">Converted ASS Text</div>
@@ -343,12 +349,15 @@
 			value: '',
 			mode: 'text',
 			lineNumbers: true,
+			theme: 'dracula'
 		});
+		console.log(originCodeMirror)
 		var serializedCodeMirror = CodeMirror(document.getElementById('serialized'), {
 			value: '',
 			mode: 'text',
 			readOnly: true,
 			lineNumbers: true,
+			theme: 'dracula'
 		});
 
 
@@ -364,58 +373,72 @@
 				let orgAss = originCodeMirror.getValue();
 				let ass_parse = assParser(orgAss);
 				subtitles = [];
+
+				let styleArray = [];
 				let index_line = 0;
 				for (let section of ass_parse) {
+					if (section.section=="V4+ Styles") {
+						for (let style of section.body) {
+							if (style.key == "Style") {
+								if(style.value.Name.endsWith("-furigana")){
+									continue;
+								}
+								styleArray.push(style.value.Name);
+							}
+						}
+					}
 					if (section.section == "Events") {
 						for (let dialogue of section.body) {
 							if (dialogue.key == "Dialogue") {
+								subtitles.push({
+								line: index_line, start: dialogue.value.Start,
+								end: dialogue.value.End,
+								style: dialogue.value.Style,
+								text: dialogue.value.Text
+								});
+
 								console.log(`\n[${dialogue.key}]\n${dialogue.value.Text}`);
 								dialogue.value.Effect = "karaoke";
 								dialogue.value.Text = convert2Karaoke(dialogue.value.Text);
 								dialogue.key = "Comment";
 								console.log(`[${dialogue.key}]\n${dialogue.value.Text}`);
-
-								subtitles.push({
-									line: index_line, start: dialogue.value.Start,
-									end: dialogue.value.End,
-									style: dialogue.value.Style,
-									text: dialogue.value.Text
-								});
 							}
 							index_line++;
 						}
 
-						let style = section.body[1].value.Style;
+						let karaokeEffect = [].concat(...styleArray.map(styleName => {
+							return [{
+								"key": "Comment",
+								"value": {
+									"Layer": "0",
+									"Start": "0:00:00.00",
+									"End": "0:00:00.00",
+									"Style": styleName,
+									"Name": "",
+									"MarginL": "0",
+									"MarginR": "0",
+									"MarginV": "0",
+									"Effect": "template syl",
+									"Text": `{\\an5\\pos($center,!$middle+${range}!)\\K!$start/10!\\K$skdur}`
+								}
+							}, {
+								"key": "Comment",
+								"value": {
+									"Layer": "0",
+									"Start": "0:00:00.00",
+									"End": "0:00:00.00",
+									"Style": styleName,
+									"Name": "",
+									"MarginL": "0",
+									"MarginR": "0",
+									"MarginV": "0",
+									"Effect": "template furi",
+									"Text": "{\\an5\\pos($center,$middle)\\K!$start/10!\\K$skdur}"
+								}
+							}];
+						}));
 
-						section.body.splice(1, 0, {
-							"key": "Comment",
-							"value": {
-								"Layer": "0",
-								"Start": "0:00:00.00",
-								"End": "0:00:00.00",
-								"Style": style,
-								"Name": "",
-								"MarginL": "0",
-								"MarginR": "0",
-								"MarginV": "0",
-								"Effect": "template syl",
-								"Text": `{\\an5\\pos($center,!$middle+${range}!)\\K!$start/10!\\K$skdur}`
-							}
-						}, {
-							"key": "Comment",
-							"value": {
-								"Layer": "0",
-								"Start": "0:00:00.00",
-								"End": "0:00:00.00",
-								"Style": style,
-								"Name": "",
-								"MarginL": "0",
-								"MarginR": "0",
-								"MarginV": "0",
-								"Effect": "template furi",
-								"Text": "{\\an5\\pos($center,$middle)\\K!$start/10!\\K$skdur}"
-							}
-						});
+						section.body.splice(1, 0, ...karaokeEffect);
 					}
 				}
 				if(document.querySelector('input[name="editor_mode"]:checked').value == "code_mode"){
