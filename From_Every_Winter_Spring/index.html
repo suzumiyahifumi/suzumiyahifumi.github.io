@@ -10,7 +10,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="mobile-web-app-capable" content="yes">
 	<title>
-		每逢冬去春來 - HackMD
+		每逢冬去春來 - 蒂亞
 	</title>
 	<link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
 	<link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
@@ -1651,7 +1651,7 @@
 					class="octicon octicon-link"></span></a><span>每逢冬去春來</span></h1>
 		<p><span style="float: right;color:#777"><span>液態香腸百分百</span></span></p><br>
 		<blockquote>
-			<p><span>一般提及提雅拉的英勇事蹟時總會提及她的半身，一位同為「半卓爾」的夥伴。諸多文獻中並未提及那位夥伴的名諱，僅僅將其作為提雅拉的左右手描述。有傳言提及，那是提雅拉為掩人耳目而使用的化身；甚至有人相信那正是「幽暗少女——伊莉絲翠」的眾多形象之一。而據精靈樹的一位長者所言⋯⋯</span>
+			<p><span>一般歌頌提雅拉的英勇事蹟時總會提及她的半身，一位同為「半卓爾」的夥伴。諸多文獻中並未提及那位夥伴的名諱，僅僅將其作為提雅拉的左右手描述。有傳言提及，那是提雅拉為掩人耳目而使用的化身；甚至有人相信那正是「幽暗少女——伊莉絲翠」的眾多形象之一。而據精靈樹的一位長者所言⋯⋯</span>
 			</p>
 			<p><span style="float: right;"><span>——節錄自《席德瑞恩記敘》</span></span></p>
 		</blockquote>
@@ -1671,7 +1671,7 @@
 		<p><span>「無所謂。」蒂亞靜靜地回應，「妳識得我嗎？」</span></p>
 		<p><span>「識得。」半身人那玩世不恭的笑臉依然不變，只是裝作不在乎地重新把玩起手上的小金屬牌子。</span></p>
 		<p><span>「你認識提雅拉？」</span></p>
-		<p><span>「妳說妳不是提雅拉的。我應該沒記錯吧？」</span></p><br>
+		<p><span>「妳說過妳不是提雅拉。我應該沒記錯吧？」</span></p><br>
 		<p><span>這時蒂亞才發現自己著了這半身人的道。</span></p><br>
 		<p><span>「那麼，」半身人伸出右手，「提雅拉，我是伊絲——伊絲・葛蘭西。」</span></p>
 		<p><span>「嗯，葛蘭西。我記住了。」</span></p>
@@ -1849,6 +1849,16 @@
 		integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
 	<script>
 		var markdown = $(".markdown-body");
+		// scrolling for vertical scroll Event
+		markdown.on('mousewheel', function(e){
+			if(e.originalEvent.wheelDeltaY > 0) {
+				markdown.scrollLeft(markdown.scrollLeft()+e.originalEvent.wheelDeltaY);
+			} else {
+				markdown.scrollLeft(markdown.scrollLeft()+e.originalEvent.wheelDeltaY);
+			}
+		});
+
+
 		//smooth all hash trigger scrolling
 		function smoothHashScroll() {
 			var hashElements = $("a[href^='#']").toArray();
