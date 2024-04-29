@@ -1850,7 +1850,7 @@
 	<script>
 		var markdown = $(".markdown-body");
 		// scrolling for vertical scroll Event
-		markdown.on('mousewheel', function(e){
+		markdown.on('wheel', function(e){
 			if(e.originalEvent.wheelDeltaY > 0) {
 				markdown.scrollLeft(markdown.scrollLeft()+e.originalEvent.wheelDeltaY);
 			} else {
