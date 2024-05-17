@@ -10,10 +10,10 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="mobile-web-app-capable" content="yes">
 	<title>
-		每逢冬去春來 - 蒂亞
+		每逢冬去春來 - HackMD
 	</title>
-	<link rel="icon" type="image/png" href="./img/favicon.ico">
-	<link rel="apple-touch-icon" href="./img/Lw78TxR.png">
+	<link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+	<link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
@@ -608,6 +608,76 @@
 			vertical-align: middle
 		}
 
+		.markdown-alert {
+			border-left-style: solid;
+			border-left-width: 4px;
+			color: inherit;
+			margin-bottom: 16px;
+			padding: 8px 16px
+		}
+
+		.markdown-alert .markdown-alert-title {
+			align-items: center;
+			display: flex;
+			font-weight: 500;
+			line-height: 1
+		}
+
+		.markdown-body .markdown-alert>* {
+			margin-bottom: 0;
+			margin-top: 16px
+		}
+
+		.markdown-body .markdown-alert .selection-popover,
+		.markdown-body .markdown-alert>:first-child {
+			margin-top: 0
+		}
+
+		.markdown-alert.markdown-alert-note {
+			border-left-color: #0969da
+		}
+
+		.markdown-alert.markdown-alert-note .markdown-alert-title {
+			fill: currentColor;
+			color: #0969da
+		}
+
+		.markdown-alert.markdown-alert-tip {
+			border-left-color: #1a7f37
+		}
+
+		.markdown-alert.markdown-alert-tip .markdown-alert-title {
+			fill: currentColor;
+			color: #1a7f37
+		}
+
+		.markdown-alert.markdown-alert-important {
+			border-left-color: #8250df
+		}
+
+		.markdown-alert.markdown-alert-important .markdown-alert-title {
+			fill: currentColor;
+			color: #8250df
+		}
+
+		.markdown-alert.markdown-alert-warning {
+			border-left-color: #9a6700
+		}
+
+		.markdown-alert.markdown-alert-warning .markdown-alert-title {
+			fill: currentColor;
+			color: #9a6700
+		}
+
+		.markdown-alert.markdown-alert-caution {
+			border-left-color: #d1242f
+		}
+
+		.markdown-alert.markdown-alert-caution .markdown-alert-title {
+			fill: currentColor;
+			color: #d1242f
+		}
+
 		.markdown-body {
 			max-width: 758px;
 			overflow: visible !important;
@@ -763,6 +833,10 @@
 			white-space: -moz-pre-wrap;
 			white-space: -pre-wrap;
 			white-space: -o-pre-wrap
+		}
+
+		.markdown-body pre.pseudocode {
+			white-space-collapse: collapse
 		}
 
 		.markdown-body summary {
@@ -1664,8 +1738,8 @@
 		<p><span>「蒂亞。我很確定。」</span></p>
 		<p><span>「好吧，蒂亞，讓我再確認一次。妳要前往『</span><ruby><span>科曼瑟爾</span>
 				<rt><span>Cormanthyr</span></rt>
-			</ruby><span>』 </span><sup class="footnote-ref"><a href="#fn1"
-					id="fnref1">[1]</a></sup><span>⋯⋯」眼前身著花衫，頂著一頭熱情的紅髮，手上正把玩著一枚小小令牌的半身人女性正放任馬車隨性地前行。「妳確定不是要去『</span><ruby><span>科曼索</span>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn1"
+					id="fnref1">[1]</a></sup><span>帝國』⋯⋯」眼前身著花衫，頂著一頭熱情的紅髮，手上正把玩著一枚小小令牌的半身人女性正放任馬車隨性地前行。「妳確定不是要去『</span><ruby><span>科曼索</span>
 				<rt><span>Cormanthor</span></rt>
 			</ruby><span>』</span><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><span>嗎？」</span></p>
 		<br>
@@ -1673,7 +1747,7 @@
 		<p><span>「啊！我明白了，妳是從『</span><ruby><span>永聚島</span>
 				<rt><span>Evermeet</span></rt>
 			</ruby><span>』</span><sup class="footnote-ref"><a href="#fn3"
-					id="fnref3">[3]</a></sup><span>回來的朝聖者對吧！」那半身人突然坐起來笑吟吟地道：「不過很可惜，『科曼瑟爾』早就已經不存在了。」</span></p>
+					id="fnref3">[3]</a></sup><span>回來的朝聖者對吧！」那半身人突然坐起來笑吟吟地道：「不過很可惜，『科曼瑟爾帝國』早就已經不存在了。」</span></p>
 		<p><span>「無所謂。」蒂亞靜靜地回應，「妳識得我嗎？」</span></p>
 		<p><span>「識得。」半身人那玩世不恭的笑臉依然不變，只是裝作不在乎地重新把玩起手上的小金屬牌子。</span></p>
 		<p><span>「你認識提雅拉？」</span></p>
@@ -1685,54 +1759,58 @@
 		<p><span>蒂亞對眼前的半身人感到困惑。所謂『習慣』是指半身人特有的自在感，又或者是她自己個人的要求，還是說，是指源自人與人之間經相處累計而來的慣例呢？</span></p>
 		<p><span>蒂亞並沒有開口詢問，打從諾茲離開蒂亞身邊後，她就不再隨意地詢問關於『名字』的事情。而眼前的半身人有股魔力，她的紅髮與笑臉讓人放下戒心。直到現在蒂亞才發覺自己過於放鬆了。</span></p><br>
 		<p><span>把斗篷拉緊後，蒂亞重新問道：「伊絲，剛才妳說科曼瑟爾怎麼了？」</span></p>
-		<p><span>「那裡早已不是往昔的精靈帝國，當然，精靈的勢力依然存在，但周圍的人類城邦逐漸興起。留下的僅有偉大而日益腐朽的遺跡，儘管那些精靈的部族尚存一息，卻不能否認衰退之勢逐年顯現。」</span></p>
+		<p><span>「那裡早已不是往昔的精靈帝國，當然，精靈的勢力依然存在，他們高舉著統治之刃，宣稱『科曼瑟爾的復興』，然而周圍的人類城邦正逐漸興起，</span><ruby><span>耐色瑞爾人</span>
+				<rt><span>Netherese</span></rt>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn4"
+					id="fnref4">[4]</a></sup><span>正虎視眈眈。唯一還留有的榮耀僅有偉大而日益腐朽的遺跡，儘管那些精靈部族已獲的喘息，但短短的百年對精靈而言算不上復興，而不能否認的是衰退之勢逐年顯現。」</span>
+		</p>
 		<p><span>伊絲不疾不徐地說著，配合馬車的律動，就像轉述他人話語般，一字不漏地說與蒂亞。</span></p>
-		<p><span>「科曼索則是它現在的名諱，那裡將作為精靈的墓地，或許千年之後，精靈一族會隨著信仰一併消失⋯⋯」至此，伊絲的話語聲漸落。</span></p><br>
+		<p><span>「我更願意用『科曼索』為它現在的名諱，那裡將作為精靈的墓地，或許千年之後，精靈一族會隨著信仰一併消失⋯⋯」至此，伊絲的話語聲漸落。</span></p><br>
 		<p><span>「隨信仰一併消失？」</span></p>
 		<p><span>「是的。」伊絲執起手邊的韁繩，但並未驅策馬車加速。</span></p>
 		<p><span>「恕我冒昧，在我看來，</span><ruby><span>沙罕尼・月弓</span>
 				<rt><span>Sehanine Moonbow</span></rt>
-			</ruby><span> </span><sup class="footnote-ref"><a href="#fn4"
-					id="fnref4">[4]</a></sup><span>的力量並無頹弱之勢。若說科曼瑟爾已是往日榮光，那是歷史的不幸，然而</span><ruby><span>席德瑞恩</span>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn5"
+					id="fnref5">[5]</a></sup><span>的力量並無頹弱之勢。若說科曼瑟爾帝國已是往日榮光，那是歷史的不幸，然而</span><ruby><span>席德瑞恩</span>
 				<rt><span>The Seldarine</span></rt>
-			</ruby><span>諸神 </span><sup class="footnote-ref"><a href="#fn5"
-					id="fnref5">[5]</a></sup><span>對精靈的庇護依然健在。」</span></p>
+			</ruby><span>諸神 </span><sup class="footnote-ref"><a href="#fn6"
+					id="fnref6">[6]</a></sup><span>對精靈的庇護依然健在。」</span></p>
 		<p><span>「沒錯。」伊絲不疾不徐的肯定了。</span></p>
 		<p><span>「既然如此，精靈一族又何來覆滅？」</span></p>
 		<p><span>「提雅拉，信仰就是這麼回事。手持聖徽的牧師們透過禱告感應諸神的餽贈；聖武者們將諸神的信念付諸行動，以此獲得力量。然而當諸神墮落之時，祂的代行者也隨之腐化，祂的追隨者則走向歧途，蛛后——</span><ruby><span>蘿絲</span>
 				<rt><span>Lolth</span></rt>
-			</ruby><span> </span><sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup><span>就是一例。」</span>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup><span>就是一例。」</span>
 		</p>
 		<p><span>「蛛后，那位遭到放逐的</span><ruby><span>塔納利</span>
 				<rt><span>Tanar'ri</span></rt>
-			</ruby><span> </span><sup class="footnote-ref"><a href="#fn7"
-					id="fnref7">[7]</a></sup><span>？我可不認同那是席德瑞恩諸神的衰頹。」蒂亞清楚知道由一位卓爾口中說出這話不一定能給人好印象（就算是混血也一樣），甚至有時會被人們認為這是矯揉造作的演技。</span>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn8"
+					id="fnref8">[8]</a></sup><span>？我可不認同那是席德瑞恩諸神的衰頹。」蒂亞清楚知道由一位卓爾口中說出這話不一定能給人好印象（就算是混血也一樣），甚至有時會被人們認為這是矯揉造作的演技。</span>
 		</p>
 		<p><span>蒂亞繼續道：「事實上，自從柯瑞隆將其逐出</span><ruby><span>阿凡多</span>
 				<rt><span>Arvandor</span></rt>
-			</ruby><span> </span><sup class="footnote-ref"><a href="#fn8"
-					id="fnref8">[8]</a></sup><span>的那刻起，席德瑞恩諸神又再次證明其自身的強大，對抗邪惡的力量終將勝利。</span><ruby><span>阿羅詩</span>
-				<rt><span>Araushnee</span></rt>
 			</ruby><span> </span><sup class="footnote-ref"><a href="#fn9"
-					id="fnref9">[9]</a></sup><span>與</span><ruby><span>維綸</span>
-				<rt><span>Vhaeraun</span></rt>
+					id="fnref9">[9]</a></sup><span>的那刻起，席德瑞恩諸神又再次證明其自身的強大，對抗邪惡的力量終將勝利。</span><ruby><span>阿羅詩</span>
+				<rt><span>Araushnee</span></rt>
 			</ruby><span> </span><sup class="footnote-ref"><a href="#fn10"
-					id="fnref10">[10]</a></sup><span>受到應有的審判。」</span></p><br>
+					id="fnref10">[10]</a></sup><span>與</span><ruby><span>維綸</span>
+				<rt><span>Vhaeraun</span></rt>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn11"
+					id="fnref11">[11]</a></sup><span>受到應有的審判。」</span></p><br>
 		<p><span>蒂亞有些激動，很少事情能讓她如此，但這份激動似乎不是來自她的本心——難以言喻的憤恨。</span></p><br>
 		<p><span>「那麼</span><ruby><span>伊莉絲翠</span>
 				<rt><span>Eilistraee</span></rt>
-			</ruby><span> </span><sup class="footnote-ref"><a href="#fn11"
-					id="fnref11">[11]</a></sup><span>呢？那位美麗的舞者又為何遭到放逐？」伊絲調侃地問道。</span></p>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn12"
+					id="fnref12">[12]</a></sup><span>呢？那位美麗的舞者又為何遭到放逐？」伊絲調侃地問道。</span></p>
 		<p><span>「伊莉絲翠的自願流放是出自於對於阿凡多的責任！」蒂亞喊道。</span></p>
 		<p><span>「然而伊莉絲翠在費倫上的影響力微乎其微。」伊絲用抱歉的表情說著。</span></p>
 		<p><span>「祂正與蛛后之道對抗，蛛后的自私早已深植部分卓爾以致眾人根深柢固的偏見。但為時尚早，救贖並非一蹴可及⋯⋯」</span></p>
 		<p><span>「不，我是指伊莉絲翠的力量正在衰弱，而那並非來自蛛后的壯大。」</span></p>
-		<p><span>「妳認為自己能夠妄議神祇的力量？」蒂亞緊握著腰間的劍柄，指頭不住地在劍柄尖上的月弓圖騰來回搓揉。</span></p>
+		<p><span>「妳認為自己能夠妄議神祇的力量？」蒂亞緊握著腰間的劍柄，指頭不住地在劍柄上的月弓圖騰來回搓揉。</span></p>
 		<p><span>伊絲瞪大眼睛：「不，我不能，但我有雙眼，我有耳朵，我是小小的半身人術士！我自然能觀察到生活中的變化！」她眼神中有些興奮，就像在期待什麼一般，手上的金屬令牌握得老緊，隨時能夠用一發狂野魔法阻止蒂亞的劍。</span>
 		</p><br>
 		<p><span>「當諸神被遺忘時，其子民將無所適從，祂的餽贈會以極快的速度衰退。而妳無法感知到，是因為妳只是位莎罕尼・月弓的追隨者！」伊絲的音調有些拔高，像是刻意要刺激『提雅拉』。</span></p>
 		<p><span>「絕不可能！」蒂亞脫口而出的反對。</span></p>
-		<p><span>伊絲搖搖頭說道：「瞧你在說些什麼？可別忘了自己的誓言。」</span></p>
+		<p><span>伊絲搖搖頭說道：「瞧妳在說些什麼？可別忘了自己的誓言。」</span></p>
 		<p><span>蒂亞無法置信緊張與義憤填膺徹底支配自己的身體，或者說，這副身軀——提雅拉的肉體。</span></p><br>
 		<p><span>「讓我來告訴妳，伊莉絲翠的犧牲是為了救贖而生，而救贖將無法被平等的廣施於眾！祂對費倫將力所不及，唯一的方法便是以身體實踐延續祂的意志！」伊絲此時此刻比任何時候都還要來得認真嚴肅，眼前的女人不再是馬車上慵懶的半身人。</span>
 		</p>
@@ -1741,10 +1819,96 @@
 		<p><br><br></p>
 		<hr><br>
 		<blockquote>
+			<p><span>眾所週知，幽暗少女——伊莉絲翠與魔法女神——密斯特拉有著匪淺的交情，魔法女神也與幽暗少女分享魔網的力量。魔法女神的選民：暗黑女祭司——齊魯埃·維拉多恩，也同時是幽暗少女的忠誠祭司，她在紛擾的顱骨港中為伊莉絲翠建立「幽暗少女的長廊」。而提雅拉也曾受其幫助，據說齊魯埃·維拉多祭司恩完美的解除那場與維綸教會的衝突，僅有一位戰友犧牲。但同時也引來顱骨港其他蛛后勢力的注意⋯⋯</span>
+			</p>
 			<p><span style="float: right;"><span>——節錄自《席德瑞恩記敘》</span></span></p>
 		</blockquote>
 		<h2 id="二、諾茲" data-id="二、諾茲"><a class="anchor hidden-xs" href="#二、諾茲" title="二、諾茲"><span
-					class="octicon octicon-link"></span></a><span>二、諾茲</span></h2><br><br>
+					class="octicon octicon-link"></span></a><span>二、諾茲</span></h2><br>
+		<p><span>『提雅⋯⋯提雅⋯⋯提雅⋯⋯』</span></p>
+		<p><span>心跳的脈搏聲漸進，撕心裂肺的痛楚沿著寸寸肌膚攀至耳根，陣陣的呼喚聲是唯一的信標。</span></p>
+		<p><span>這個過程總是緩慢而令人捉急，彷彿孤身一人走在荒蕪之上，藉著那彎新月微光，獨步於塵。</span></p><br>
+		<p><span>『生而為誰⋯⋯為誰而生⋯⋯』細細的囈語流淌在耳際。</span></p><br>
+		<p><span>良久，盤旋在耳際的溫柔囈語終於允許『自己』看清眼前的『蒂亞』。</span></p>
+		<p><span>『蒂亞』看上去非常的安詳，薄薄的嘴唇輕輕地抿著，嘴角略帶笑意，眼瞼微斂，柳眉舒展，彷彿隨時會甦醒般。</span></p><br>
+		<p><span>「蒂亞⋯⋯」諾茲的叫喚將蒂亞拉回餐桌。</span></p>
+		<p><span>茶杯中『自己』的倒影旁又多出一位精靈女性。</span></p>
+		<p><span>「妳剛才有叫我嗎？」蒂亞盯著倒影中的諾茲。</span></p>
+		<p><span>「蒂亞。」那位精靈女性很鄭重的重複了一遍。</span></p><br>
+		<p><span>在餐桌上，諾茲將馬鈴薯泥、司康餅堆到蒂亞面前，她坐到對側，拿起麵包抹上果醬。</span></p>
+		<p><span>「昨天又去聖堂了嗎？」諾茲手上並未停止動作，只是看了看盯著茶杯的蒂亞。</span></p>
+		<p><span>「嗯。」</span></p>
+		<p><span>「還是探望那具遺體？」</span></p>
+		<p><span>「因為又模糊了⋯⋯那張臉⋯⋯」</span></p>
+		<p><span>「這次記清了嗎？」</span></p>
+		<p><span>接過諾茲遞來的方糖，蒂亞應了聲「嗯。」</span></p>
+		<p><span>蒂亞將方糖夾到盤中，一顆顆地數過：「她薄薄的嘴唇，我還記得⋯⋯」</span></p>
+		<p><span>「嘴唇啊⋯⋯確實，是如絮般的嘴唇。」</span></p>
+		<p><span>「不只嘴唇，她的眉毛也很細。」此時，罐中的方糖只剩下幾顆。</span></p>
+		<p><span>「嗯，像一柄貫穿人心的細劍。」</span></p><br>
+		<p><span>蒂亞將方糖整齊地推在盤中，像座小小的塔。她拿起最後一顆方糖，眼神順著糖粒與糖粒交織出的紋理觀察著，像是想起什麼地張了張口，隨後又輕輕地抿起嘴，欲言又止的樣子。</span></p>
+		<p><span>「還記得些什麼嗎？」諾茲的聲音又推動了她的思緒。</span></p>
+		<p><span>「二十四。」</span></p>
+		<p><span>「嗯？感覺不出她有二十多歲。」</span></p>
+		<p><span>「不，這是第二十四顆。」蒂亞將手上的方糖丟進茶杯。</span></p><br>
+		<p><span>她輕輕地拌著茶水，看著方糖在深紅的茶中先是被侵蝕般地融掉，隨後崩解成幾塊，最後消失在茶杯中。那抹紅茶色捲起小小的漩渦，像極了縷縷的⋯⋯</span></p>
+		<p><span>「紅髮⋯⋯」蒂亞抬起頭來注視著諾茲，「熱情的紅色頭髮。我還記得⋯⋯那襲如浪的深紅秀髮。」</span></p>
+		<p><span>蒂亞的眼瞳映著諾茲的笑容，那份笑容總是讓人感到安心又嚴厲。能包容一切的雙頰酒窩向蒂亞訴說著『放心、安心』，而深邃的海藍色眼瞳卻把蒂亞拖入漩渦中，逼著她『思考』。</span></p>
+		<p><span>「那麼，她是誰？」終於，蒂亞聽到最不想觸碰的提問。</span></p>
+		<p><span>「她是⋯⋯」</span></p><br>
+		<p><span>「提雅？」在夜幕中，伊絲低低地叫了聲蒂亞。</span></p>
+		<p><span>在時間的幫助下，兩人終於在『稱謂』上達成妥協，『提雅』成了伊絲對蒂亞的愛稱。</span></p>
+		<p><span>「嗯⋯⋯怎麼了？」蒂亞睡眼惺忪的轉身看向睡在身旁的伊絲。</span></p>
+		<p><span>「剛剛不是叫我嗎？」伊絲撥著遮掩視線的紅髮，小聲地問道：「『伊絲——伊絲——』的輕喊著。」</span></p>
+		<p><span>儘管在昏暗的地城中，伊絲那嶙峋的紅髮依然在燈火間熠熠生輝。</span></p>
+		<p><span>「海浪！」蒂亞盯著半身人的臉龐，暗暗心驚：『那襲如浪般的深紅秀髮。』</span></p>
+		<p><span>「怎麼愣著呢？」伊絲坐起身子，打開提燈的遮罩，火光悄悄地爬向地道的轉角，爬向</span><ruby><span>地脈迷城</span>
+				<rt><span>Undermountain</span></rt>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn13" id="fnref13">[13]</a></sup><span>的深處。</span>
+		</p><br>
+		<p><span>「伊絲，我想⋯⋯或許我們不該繼續往下一層⋯⋯」</span></p>
+		<p><span>伊絲輕呼了聲，隨後翻了個白眼：「天啊！精靈小姐，我以為這件事情已經討論過了！如果不前往</span><ruby><span>幽暗長廊</span>
+				<rt><span>Promenade of the Dark Maiden</span></rt>
+			</ruby><span> </span><sup class="footnote-ref"><a href="#fn14"
+					id="fnref14">[14]</a></sup><span>，那群卓爾不會善罷甘休的！」</span></p>
+		<p><span>「或許有別的辦法能聯繫</span><ruby><span>齊魯埃·維拉多恩</span>
+				<rt><span>Qilué Veladorn</span></rt>
+			</ruby><span>祭司！只要⋯⋯」</span></p>
+		<p><span>「只要怎樣？」伊絲有些惱怒。「聽著，親愛的朋友，提雅，我們花了一個月的時間終於來到第三層的入口，我甚至忍受那群不討喜的小生物，恕我無禮，但那群地精真的有些自視甚高。總之，來到顱骨港不正是莎罕尼的指引嗎？」</span>
+		</p>
+		<p><span>「那只不過是一個夢⋯⋯」蒂亞露出厭煩的表情。</span></p><br>
+		<p><span>「夢境！我的密斯特拉女神！妳剛剛是說『那只是一個夢』嗎？」伊絲不敢置信的搖著蒂亞的身體。「就連我這小小半身人術士都感到心寒！沒有任何一位聖武者會如此褻瀆自己的信仰！」</span></p>
+		<p><span>伊絲的聲音在幽暗的走道間迴盪，這讓她突然壓低聲音緊張地唸掏道：「這兩年來我們走南闖北，跑遍費倫大陸追蹤幽暗少女的足跡，正是因為妳的所謂的『預感』！而那些『預感』來自『莎罕尼的夢境』！」</span></p>
+		<p><span>伊絲瞪著蒂亞，火光照亮蒂亞那張黝黑的臉龐。</span></p>
+		<p><span>「事到如今，妳卻跟我說『那只是一個夢』！」</span></p><br>
+		<p><span>蒂亞有些緊張，她不敢直視伊絲的眼睛。伊絲雖然是個玩世不恭的半身人，但在緊要關頭總能從一團混亂無序的事件中，推敲、猜測正確的選擇。就像在雜亂無章的麥絮中準確地認出一把把的麥梗。這種『直覺』非常要命，或許這就是伊絲身為術士的天賦之一。</span>
+		</p><br>
+		<p><span>「這次跟以往的不同⋯⋯」蒂亞伸出手撫摸伊絲的紅髮。「我想說的是⋯⋯我或許搞錯了⋯⋯或許只要能聯絡到幽暗長廊的祭司⋯⋯」</span></p>
+		<p><span>蒂亞冰冷的手掌順著髮流摸向伊絲的臉頰，但依然沒有對上那雙透亮的眼珠，顫抖地感受半身人的體溫。</span></p>
+		<p><span>「親愛的朋友。妳是不是又看到了夢境？」伊絲舉起手蓋在蒂亞的手背，「我相信莎罕尼帶來的啟示並非全然是好事，但當有什麼厄運即將降臨時，祂或許也會給我們一點小小的提示。」</span></p><br>
+		<p><span>蒂亞感受著半身人臉頰與掌心的溫度，輕輕地「嗯」聲。</span></p>
+		<p><span>「所以，這回祂希望我們離開顱骨港嗎？」伊絲輕輕地問道。</span></p>
+		<p><span>蒂亞緩緩搖著頭，眼神留在半身人的紅髮上：「並非如此⋯⋯」</span></p>
+		<p><span>「那麼是哪件事讓妳如此掛心呢？」</span></p>
+		<p><span>「掛心？」</span></p>
+		<p><span>「嗯，掛心，妳的表情正如是說著。像森林裡的輓歌，有什麼即將離去。」</span></p>
+		<p><span>伊絲抬起蒂亞的下巴，兩人終於對視了。</span></p>
+		<p><span>伊絲的笑容總是讓人感到勇敢又可靠。自信的紅髮推著蒂亞『向前邁步』，而澄澈的淡綠色眼瞳則領著她『避開錯誤』。</span></p>
+		<p><span>「跟我說說吧！親愛的提雅，妳真正掛心的事情。」</span></p>
+		<p><span>蒂亞忽然有種強烈的感覺，她感覺只要伊絲在身邊，自己就能避開重重的障礙，那道令人不愉快的『預感』在兩人面前不過是道『警示』！</span></p>
+		<p><span>「伊絲，吾友。」蒂亞真切地盯著半身人青綠色的眼瞳說道：「妳有生命危險了！」</span></p><br>
+		<p><span>「在顱骨港，那裡會要了妳的小命。」蒂亞的聲音細小卻低沈。</span></p>
+		<p><span>沈沈的聲音向地脈迷城深處漫去，慢慢地被幽深的黑暗融化吸收，最後如同方糖在熱茶中溶解殆盡。</span></p><br>
+		<p><span>「而我們會解決的，對吧，伊絲？」</span></p>
+		<p><span>「當然，我的提雅，我們能解決的！」</span></p>
+		<p><br><br></p>
+		<hr><br>
+		<blockquote>
+			<p><span>三年</span></p>
+			<p><span style="float: right;"><span>——節錄自《席德瑞恩記敘》</span></span></p>
+		</blockquote>
+		<h2 id="三、科曼瑟爾" data-id="三、科曼瑟爾"><a class="anchor hidden-xs" href="#三、科曼瑟爾" title="三、科曼瑟爾"><span
+					class="octicon octicon-link"></span></a><span>三、科曼瑟爾</span></h2><br>
 		<hr class="footnotes-sep">
 		<section class="footnotes">
 			<ol class="footnotes-list">
@@ -1768,60 +1932,73 @@
 						<a href="#fnref3" class="footnote-backref">↩︎</a></p>
 				</li>
 				<li id="fn4" class="footnote-item">
+					<p><a href="https://forgottenrealms.fandom.com/wiki/Netherese" target="_blank"
+							rel="noopener"><span>耐色瑞爾人</span></a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+				</li>
+				<li id="fn5" class="footnote-item">
 					<p><a href="https://dnd.fandom.com/zh/wiki/%E8%8E%8E%E7%BD%95%E5%A6%AE%C2%B7%E6%9C%88%E5%BC%93Sehanine_Moonbow?variant=zh-tw"
 							target="_blank" rel="noopener"><span>莎罕妮・月弓</span></a><span>：雖然 柯瑞隆Corellon 的聖徽是一輪新月，但
 							莎罕尼·月弓Sehanine Moonbow
 							才是精靈的月女神——或者更確切地說，滿月女神。她管理著預言、預兆與精微的魔法，她還保護人民免受瘋狂困擾。她看護著精靈的夢境，防止他們在醒夢時被人所傷，並給予他們迴避未來危險的預兆。莎罕尼看護著精靈的精魂們跨越世界的旅途，她同時也是死者的保護神。夜空之女同樣也是那些完結了在紅塵凡世的凡緣，準備離開他們熟悉與熱愛的大地，踏上前往諸如
 							永聚島Evermeet 之類的遠方避難所的精靈們的守護者。她是三位一體女神安格芮絲的面相與組成部分之一，與柯瑞隆·拉瑞斯安育有塔斯林·瓦拉迪。</span> <a
-							href="#fnref4" class="footnote-backref">↩︎</a></p>
+							href="#fnref5" class="footnote-backref">↩︎</a></p>
 				</li>
-				<li id="fn5" class="footnote-item">
+				<li id="fn6" class="footnote-item">
 					<p><a href="https://dnd.fandom.com/zh/wiki/%E5%B8%AD%E5%BE%B7%E7%91%9E%E6%81%A9%E8%AF%B8%E7%A5%9EThe_Seldarine"
 							target="_blank" rel="noopener"><span>德瑞恩諸神</span></a><span>：即 精靈諸神Gods of the Elves 或
 							精靈神系the Elven
 							Pantheon，Seldarine這個複合詞大致可以翻譯為「樹木兄弟與姐妹團契」，這暗示了精靈神系諸神們在利益上存在多樣性和他們對於合作互助願望。該神系部分成員被逐出形成了黑暗席德瑞恩諸神，神系中還包含部分外神。</span>
-						<a href="#fnref5" class="footnote-backref">↩︎</a></p>
+						<a href="#fnref6" class="footnote-backref">↩︎</a></p>
 				</li>
-				<li id="fn6" class="footnote-item">
+				<li id="fn7" class="footnote-item">
 					<p><a href="https://dnd.fandom.com/zh/wiki/%E7%BD%97%E4%B8%9DLolth" target="_blank"
 							rel="noopener"><span>蘿絲</span></a><span>：羅絲Lolth（讀作「LOLTH」）是卓爾種族與卓爾社會的女神。她是大部分卓爾社群的本性、風俗、法律的成因和這些社群生存的依賴。通過她那些孜孜不倦地篩出所有異議、違命、敵對信仰、或是褻瀆的蹤跡並加以毀滅，冷酷地踐行著
 							羅絲之道the Way of Lolth
 							的神職人員，蛛後維持著對卓爾城市的絕對統治。蛛後在卓爾社會中煽動著無盡的混亂，並為了取悅自己、為了防止自滿與失控的驕傲的滋生或是避免敵對信仰的崛起，而令卓爾一族陷於永恆的同族戰爭之中。羅絲也被
-							半蛛人chitine 崇拜著，那是一種被卓爾拋棄的小型類蜘蛛種族。</span> <a href="#fnref6" class="footnote-backref">↩︎</a>
+							半蛛人chitine 崇拜著，那是一種被卓爾拋棄的小型類蜘蛛種族。</span> <a href="#fnref7" class="footnote-backref">↩︎</a>
 					</p>
 				</li>
-				<li id="fn7" class="footnote-item">
+				<li id="fn8" class="footnote-item">
 					<p><a href="https://forgottenrealms.fandom.com/wiki/Tanar%27ri" target="_blank"
 							rel="noopener"><span>塔納利</span></a><span>：Tanar'ri (pronounced: /tɑːˈnɑːrri/ tah-NAHR-ree
 							or: /tɛˈnɑːri/ teh-NAH-ree or: /təˈnɑːri/ tuh-NAHR-ee)
 							是深淵中惡魔的統治種族，邪惡的靈魂被其原始的混亂扭曲成凡人失敗的表現。無論它們是自然產生於罪惡和靈魂，還是由邪神或其他強大的惡魔塑造，所有塔那利都是邪惡的化身，是從凡人心靈最黑暗的角落衍生出來的邪惡的內在惡魔。</span>
-						<a href="#fnref7" class="footnote-backref">↩︎</a></p>
-				</li>
-				<li id="fn8" class="footnote-item">
-					<p><a href="https://forgottenrealms.fandom.com/wiki/Arvandor" target="_blank"
-							rel="noopener"><span>阿凡多</span></a><span>：阿凡多是阿爾博雷亞外層位面第一層的領域。它是大多數席德瑞恩人的家園和共同的神聖領域。在世界樹宇宙觀中，它與矮人之家並列為世界樹的根源之一。在世界軸心宇宙觀中，它被認為是一個星體領地，也是金山領主的主要家園。</span>
 						<a href="#fnref8" class="footnote-backref">↩︎</a></p>
 				</li>
 				<li id="fn9" class="footnote-item">
-					<p><a href="https://dnd.fandom.com/zh/wiki/%E7%BD%97%E4%B8%9DLolth" target="_blank"
-							rel="noopener"><span>阿羅詩</span></a><span>：蛛后放逐前的名稱。</span> <a href="#fnref9"
-							class="footnote-backref">↩︎</a></p>
+					<p><a href="https://forgottenrealms.fandom.com/wiki/Arvandor" target="_blank"
+							rel="noopener"><span>阿凡多</span></a><span>：阿凡多是阿爾博雷亞外層位面第一層的領域。它是大多數席德瑞恩人的家園和共同的神聖領域。在世界樹宇宙觀中，它與矮人之家並列為世界樹的根源之一。在世界軸心宇宙觀中，它被認為是一個星體領地，也是金山領主的主要家園。</span>
+						<a href="#fnref9" class="footnote-backref">↩︎</a></p>
 				</li>
 				<li id="fn10" class="footnote-item">
+					<p><a href="https://dnd.fandom.com/zh/wiki/%E7%BD%97%E4%B8%9DLolth" target="_blank"
+							rel="noopener"><span>阿羅詩</span></a><span>：蛛后放逐前的名稱。</span> <a href="#fnref10"
+							class="footnote-backref">↩︎</a></p>
+				</li>
+				<li id="fn11" class="footnote-item">
 					<p><a href="https://dnd.fandom.com/zh/wiki/%E7%BB%B4%E4%BC%A6Vhaeraun" target="_blank"
 							rel="noopener"><span>維綸</span></a><span>：維倫Vhaeraun（讀作「Vay-RAWN」）是盜竊之神，是卓爾在 夜上世界the Night
 							Above（其信徒對地表世界的稱呼）中的目標、興趣與勢力的促進者。他同樣是那些反對 羅絲Lolth
 							母權制的男性卓爾之神，他教導男性卓爾他們與女性有著同等的能力與價值——而這事實上與羅絲的祭職者們在這點上的教誨相背。他認為，卓爾精靈應該為了共同向前而與其他種族的精靈互相合作，但永遠不應該和灰矮人、地底侏儒或其他別的種類的矮人侏儒進行合作或貿易。（人類和半身人還勉強可以接受）。</span>
-						<a href="#fnref10" class="footnote-backref">↩︎</a></p>
+						<a href="#fnref11" class="footnote-backref">↩︎</a></p>
 				</li>
-				<li id="fn11" class="footnote-item">
-					<p><a href="https://dnd.fandom.com/zh/wiki/%E4%BC%8A%E8%8E%89%E4%B8%9D%E7%BF%A0Eilistraee#%E6%95%99%E4%BC%9AThe_Church"
+				<li id="fn12" class="footnote-item">
+					<p><a href="https://dnd.fandom.com/zh/wiki/%E4%BC%8A%E8%8E%89%E4%B8%9D%E7%BF%A0Eilistraee"
 							target="_blank" rel="noopener"><span>伊莉絲翠</span></a><span>：有那麼極少數的善良卓爾精靈，他們渴望重新生活在 諸國度地表the
 							surface
 							Realms、渴望體驗久已被同胞們遺忘的森林氣息，伊莉絲翠Eilistraee（讀作「EEL-iss-TRAY-yee」）便是他們的女神。作為掌管歌與美、善良與光明的女神，信徒們——最好是在地表世界的星光之下——通過歌舞敬拜她。伊莉絲翠會為她忠實信徒提供狩獵和劍技上的援助，與之相對，信徒通常會在祭拜她時舉行一場盛宴。除卓爾精靈外，伊莉絲翠也有很多人類、精靈、以及尤值得注意的、半精靈血統的信徒，這些半精靈信徒主要分布在
 							銀月城Silverymoon 周邊；她對 豎琴手Harpers
-							同樣態度友善。當她現身時，人們通常只能遙遙望見她的身影，但她那超凡絕俗、催人淚下的優美歌聲總是常伴她的左右。</span> <a href="#fnref11"
+							同樣態度友善。當她現身時，人們通常只能遙遙望見她的身影，但她那超凡絕俗、催人淚下的優美歌聲總是常伴她的左右。</span> <a href="#fnref12"
 							class="footnote-backref">↩︎</a></p>
+				</li>
+				<li id="fn13" class="footnote-item">
+					<p><a href="https://forgottenrealms.fandom.com/wiki/Undermountain" target="_blank"
+							rel="noopener"><span>地脈迷城</span></a> <a href="#fnref13" class="footnote-backref">↩︎</a></p>
+				</li>
+				<li id="fn14" class="footnote-item">
+					<p><a href="https://forgottenrealms.fandom.com/wiki/Promenade_of_the_Dark_Maiden" target="_blank"
+							rel="noopener"><span>幽暗少女的長廊</span></a> <a href="#fnref14" class="footnote-backref">↩︎</a>
+					</p>
 				</li>
 			</ol>
 		</section>
@@ -1839,6 +2016,7 @@
 							<ul class="nav">
 								<li><a href="#一、蒂亞" title="一、蒂亞">一、蒂亞</a></li>
 								<li><a href="#二、諾茲" title="二、諾茲">二、諾茲</a></li>
+								<li><a href="#三、科曼瑟爾" title="三、科曼瑟爾">三、科曼瑟爾</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -1856,6 +2034,7 @@
 					<ul class="nav">
 						<li><a href="#一、蒂亞" title="一、蒂亞">一、蒂亞</a></li>
 						<li><a href="#二、諾茲" title="二、諾茲">二、諾茲</a></li>
+						<li><a href="#三、科曼瑟爾" title="三、科曼瑟爾">三、科曼瑟爾</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -1872,11 +2051,11 @@
 	<script>
 		var markdown = $(".markdown-body");
 		// scrolling for vertical scroll Event
-		markdown.on('wheel', function(e){
-			if(e.originalEvent.wheelDeltaY > 0) {
-				markdown.scrollLeft(markdown.scrollLeft()+e.originalEvent.wheelDeltaY);
+		markdown.on('wheel', function (e) {
+			if (e.originalEvent.wheelDeltaY > 0) {
+				markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
 			} else {
-				markdown.scrollLeft(markdown.scrollLeft()+e.originalEvent.wheelDeltaY);
+				markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
 			}
 		});
 
