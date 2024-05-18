@@ -1554,6 +1554,13 @@
 	<div id="doc" class="markdown-body container-fluid comment-inner comment-enabled" data-hard-breaks="true">
 		<div class="embed-note">
 			<style>
+
+				body {
+					background: #dad5c5;
+					color: #000;
+				/*	font-weight: bold;*/
+				}
+
 				body>.ui-infobar {
 					max-width: 70vw !important;
 				}
@@ -2127,13 +2134,13 @@
 		// scrolling for vertical scroll Event
 		markdown.on('wheel', function (e) {
 			if (e.originalEvent.wheelDeltaY > 0) {
-				//	markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
+				markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
 				//	markdown.scrollLeft(markdown.scrollLeft() + 1);
-				markdown.stop().animate( { scrollLeft: markdown.scrollLeft() + e.originalEvent.wheelDeltaY}, 1);
+				// markdown.stop().animate( { scrollLeft: markdown.scrollLeft() + e.originalEvent.wheelDeltaY}, 1);
 			} else {
-				// markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
+				markdown.scrollLeft(markdown.scrollLeft() + e.originalEvent.wheelDeltaY);
 				// markdown.scrollLeft(markdown.scrollLeft() - 1);
-				markdown.stop().animate( { scrollLeft: markdown.scrollLeft() + e.originalEvent.wheelDeltaY}, 1);
+				// markdown.stop().animate( { scrollLeft: markdown.scrollLeft() + e.originalEvent.wheelDeltaY}, 1);
 			}
 		});
 
