@@ -1,0 +1,1 @@
+window.location.href = `https://suzumiyahifumi.com/plurk_image/images/${urls[Math.floor(Math.random() * urls.length)]}`;
